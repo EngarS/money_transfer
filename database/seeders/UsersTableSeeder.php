@@ -19,11 +19,12 @@ class UsersTableSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@admin.com',
             'password' => bcrypt('secret'),
-            'is_admin' => true
-        ], ['balance' => '100500']);
+            'is_admin' => true,
+            'balance' => 100500
+        ], ['balance' => 100500]);
 
-        //if (User::all()->count() == 0) {
+        if (User::all()->count() == 1) {
             \App\Models\User::factory(10)->create();
-        //}
+        }
     }
 }

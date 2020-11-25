@@ -20,3 +20,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/transactions/create', [\App\Http\Controllers\TransactionController::class, 'create'])->name('transactions.create');
+    Route::get('transaction/store', [\App\Http\Controllers\TransactionController::class, 'store'])->name('transactions.store');
+});
+
+
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+    Route::get('/users', [\App\Http\Controllers\AdminController::class, 'users'])->name('users');
+    Route::get('/transactions', [\App\Http\Controllers\AdminController::class, 'transactions'])->name('transactions');
+});
+

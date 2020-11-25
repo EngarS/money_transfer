@@ -13,15 +13,15 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('transactions', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->integer('money');
-            $table->string('message')->nullable();
             $table->date('date_start');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->date('date_end')->nullable();
+            $table->boolean('done')->default(0);
+            $table->foreignId('recipient_user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained();
+            $table->string('message')->nullable();
             $table->timestamps();
         });
     }
@@ -33,8 +33,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('transactions');
     }
 }

@@ -34,16 +34,16 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         @auth()
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Операции</a>
-                        </li>
-                        <li class="nav-item">
-                            <a type="button" class="btn btn-outline-info">Перевести</a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="{{route('transactions.create')}}" type="button" class="btn btn-outline-info">Перевести</a>
+                            </li>
                         @can('admin_only')
                             <li class="nav-item">
-                                <a class="nav-link" href="">Пользователи</a>
+                                <a class="nav-link" href="{{route('admin.users')}}">Пользователи</a>
                             </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('admin.transactions')}}">Все транзакции</a>
+                                </li>
                         @endcan
 
                         @endauth
@@ -96,6 +96,7 @@
         </nav>
 
         <main class="py-4">
+            @include('elements.errors')
             @yield('content')
         </main>
     </div>
