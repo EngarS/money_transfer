@@ -16,11 +16,11 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->integer('money');
-            $table->date('date_start');
-            $table->date('date_end')->nullable();
+            $table->dateTime('date_start');
+            $table->dateTime('date_end')->nullable();
             $table->boolean('done')->default(0);
             $table->foreignId('recipient_user_id')->constrained('users');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained('users');
             $table->string('message')->nullable();
             $table->timestamps();
         });

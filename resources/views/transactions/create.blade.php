@@ -10,6 +10,7 @@
 
                     <div class="card-body">
                         <form action="{{route('transactions.store')}}">
+                            <input type="hidden" name="user_id" value="{{\Illuminate\Support\Facades\Auth::id()}}">
                             <div class="form-group">
                                 <label for="inputMoney">Сумма перевода:</label>
                                 <input type="number" class="form-control" id="inputMoney" name="money" required value="{{old('money')}}">
@@ -23,8 +24,17 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="dateStart">Когда выполнить перевод:</label>
-                                <input type="datetime-local" class="form-control" id="dateStart" name="date_start" value="{{old('date_start')}}">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="hidden" name="delay" value="0">
+                                        <input type="checkbox" id="changeDelay" name="delay" value="1">
+                                        Отложенный перевод
+                                    </label>
+                                </div>
+                                <div id="dateTransfer" style="display: none;">
+                                    <label for="dateStart">Когда выполнить перевод:</label>
+                                    <input type="datetime-local" class="form-control" id="dateStart" name="date_start" value="{{old('date_start')}}">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="message">Комментарий</label>
@@ -37,5 +47,21 @@
             </div>
         </div>
     </div>
+
+    <script type="application/javascript">
+        $(document).ready(function() {
+            const checkbox = $('#changeDelay');
+            const dateBlock = $('#dateTransfer');
+            checkbox.on('click', function () {
+                if ($(this).is(':checked')) {
+                    dateBlock.show();
+                    dateBlock.find('input').attr('required', true);
+                } else {
+                    dateBlock.hide();
+                    dateBlock.find('input').attr('required', false);
+                }
+            })
+        });
+    </script>
 
 @endsection

@@ -14,9 +14,11 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Номер</th>
                                 <th scope="col">Сумма</th>
-                                <th scope="col">Дата транзакции</th>
+                                <th scope="col">Дата создания</th>
+                                <th scope="col">Дата выполения</th>
                                 <th scope="col">Перевёл</th>
                                 <th scope="col">Получатель</th>
+                                <th scope="col">Статус</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -26,13 +28,22 @@
                                         <td scope="row">{{$loop->iteration}}</td>
                                         <td>{{$transaction->id}}</td>
                                         <td>{{$transaction->money}}</td>
+                                        <td>{{$transaction->created_at}}</td>
                                         <td>{{$transaction->date_start}}</td>
-                                        <td>{{$transaction->recipient_user_id}}</td>
+                                        <td>{{$transaction->user->name}}</td>
+                                        <td>{{$transaction->recipient->first()->name}}</td>
+                                        <td>
+                                            @if($transaction->done)
+                                                <span class="badge badge-success">Выполнена</span>
+                                            @else
+                                                <span class="badge badge-secondary">В очереди</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="5">
+                                    <td colspan="7">
                                         <div class="text-center">
                                             <h3>Пока транзакций не было</h3>
                                         </div>

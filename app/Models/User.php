@@ -20,7 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'balance'
+        'balance',
+        'block_money'
     ];
 
     /**
@@ -47,6 +48,11 @@ class User extends Authenticatable
         return $this->balance;
     }
 
+    public function blocked()
+    {
+        return $this->block_money;
+    }
+
     public function isAdmin()
     {
         return $this->is_admin;
@@ -55,5 +61,11 @@ class User extends Authenticatable
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function availableMoney()
+    {
+        $availableMoney = $this->balance - $this->block_money;
+        return $availableMoney;
     }
 }

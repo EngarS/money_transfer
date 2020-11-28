@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\AvailableAmount;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,9 +26,9 @@ class TransactionStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'money' => 'required|integer|max:'.Auth::user()->balance(),
+            'money' => ['required', 'integer', new AvailableAmount],
             'recipient_user_id' => 'required|integer|exists:App\Models\User,id',
-            'date_start' => 'sometimes|nullable|date|after:today',
+            'date_start' => 'sometimes|nullable|date|after:'. now(),
             'message' => 'nullable|max:255'
         ];
     }
@@ -35,8 +36,7 @@ class TransactionStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'date_start.after' => 'Дата выполнения перевода должна быть больше текущей!',
-            'money.max' => 'На балансе не достаточно средств'
+            'date_start.after' => 'Дата выполнения перевода должна быть больше или равна текущей!',
         ];
     }
 }

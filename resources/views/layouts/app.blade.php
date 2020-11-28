@@ -68,7 +68,11 @@
                         @else
                             <li class="nav-item">
                                 <div class="nav-link">
-                                    <h4>Баланс: <span class="badge badge-success">{{\Illuminate\Support\Facades\Auth::user()->balance}}</span></h4>
+                                    <h5>Баланс: <span class="badge badge-success">{{\Illuminate\Support\Facades\Auth::user()->balance()}}</span></h5>
+                                    <span>Блокировано: <span class="badge badge-warning">{{\Illuminate\Support\Facades\Auth::user()->blocked()}}</span></span>
+                                </div>
+                                <div class="nav-link">
+
                                 </div>
 
                             </li>
@@ -96,7 +100,7 @@
         </nav>
 
         <main class="py-4">
-            @include('elements.errors')
+            @include('elements.messages')
             @yield('content')
         </main>
     </div>
