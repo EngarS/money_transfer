@@ -37,7 +37,15 @@ composer install
 #### Создать файл .env
 
 ```
-cp .env .env.example
+cp .env.example .env 
+```
+
+#### Заполнить имя БД, пользователя и пароль
+
+```
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
 ```
 
 #### Сгенерировать ключ
@@ -59,7 +67,7 @@ php artisan db:seed
 ```
 
 Будет создан администратор:   
-E-mail: **admin@admin.comс 
+E-mail: **admin@admin.com**  
 Пароль: **secret** 
 
 Тестовый пользователь: 
