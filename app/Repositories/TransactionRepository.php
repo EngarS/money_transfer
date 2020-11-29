@@ -43,14 +43,11 @@ class TransactionRepository
 
     public function completeTransaction(int $id)
     {
-        Log::info('Завершение транзакции');
         $transaction = $this->model->find($id);
         $params = [
           'done' => 1,
           'date_end' => now(),
         ];
         $transaction->update($params);
-        Log::info('Транзакция №' . $transaction->id .' завершена');
-
     }
 }

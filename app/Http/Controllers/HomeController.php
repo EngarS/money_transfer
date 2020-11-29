@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\TransactionRepository;
-use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,13 +13,11 @@ class HomeController extends Controller
 
     /**
      * HomeController constructor.
-     * @param UserService $userService
      * @param TransactionRepository $transactionRepository
      */
-    public function __construct(UserService $userService, TransactionRepository $transactionRepository)
+    public function __construct(TransactionRepository $transactionRepository)
     {
         $this->middleware('auth');
-        $this->userService = $userService;
         $this->transactionRepository = $transactionRepository;
     }
 

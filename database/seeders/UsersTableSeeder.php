@@ -23,7 +23,15 @@ class UsersTableSeeder extends Seeder
             'balance' => 100500
         ], ['balance' => 100500]);
 
-        if (User::all()->count() == 1) {
+        DB::table('users')->upsert([
+            'name' => 'User User',
+            'email' => 'user@admin.com',
+            'password' => bcrypt('secret'),
+            'is_admin' => false,
+            'balance' => 100000
+        ], ['balance' => 100000]);
+
+        if (User::all()->count() == 2) {
             \App\Models\User::factory(10)->create();
         }
     }

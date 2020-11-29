@@ -26,12 +26,12 @@
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="hidden" name="delay" value="0">
-                                        <input type="checkbox" id="changeDelay" name="delay" value="1">
+                                        {{--<input type="hidden" name="delay" value="0">--}}
+                                        <input type="checkbox" id="changeDelay" name="delay" @if(old('delay')) checked @endif value="1">
                                         Отложенный перевод
                                     </label>
                                 </div>
-                                <div id="dateTransfer" style="display: none;">
+                                <div id="dateTransfer" @if(!old('delay')) style="display: none;"@endif>
                                     <label for="dateStart">Когда выполнить перевод:</label>
                                     <input type="datetime-local" class="form-control" id="dateStart" name="date_start" value="{{old('date_start')}}">
                                 </div>
@@ -59,6 +59,7 @@
                 } else {
                     dateBlock.hide();
                     dateBlock.find('input').attr('required', false);
+                    dateBlock.find('input').val('')
                 }
             })
         });

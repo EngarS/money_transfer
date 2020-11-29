@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Jobs\TransferMoneyJob;
 use App\Repositories\TransactionRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,7 @@ class TransactionService
         $transaction = $this->transactionRepository->store($prepareData);
         $this->blockUserMoney($transaction->user_id, $transaction->money);
 
-        $this->completeTransaction($transaction->id);
+        TransferMoneyJob::dispatch($transaction->id)->delay($transaction->date_start);
 
     }
 
@@ -40,7 +41,7 @@ class TransactionService
      */
     public function prepareData(array $params)
     {
-        $params['date_start'] = $params['delay'] == 1 ? strtotime($params['date_start']) : now()->format('Y-m-d H:i:s');
+        $params['date_start'] = (isset($params['delay']) && $params['delay'] == 1)? strtotime($params['date_start']) : now()->format('Y-m-d H:i:s');
 
         return $params;
     }

@@ -25,14 +25,16 @@ class TransactionController extends Controller
     public function create()
     {
         $users = $this->userRepository->getUserList(Auth::id());
+
         return view('transactions.create', compact('users'));
     }
 
     public function store(TransactionStoreRequest $request)
     {
         $this->transactionService->store($request->input());
+
         return redirect('/home')->with('success', 'Транзация создана.');
     }
 
-    
+
 }

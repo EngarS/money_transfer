@@ -28,7 +28,7 @@ class TransactionStoreRequest extends FormRequest
         return [
             'money' => ['required', 'integer', new AvailableAmount],
             'recipient_user_id' => 'required|integer|exists:App\Models\User,id',
-            'date_start' => 'sometimes|nullable|date|after:'. now(),
+            'date_start' => 'required_with:delay|nullable|date|after:'. now(),
             'message' => 'nullable|max:255'
         ];
     }

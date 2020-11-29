@@ -21,6 +21,72 @@
 
 Для создания таблиц в БД необходимо использовать миграции и сиды для заполнения тестовыми данными.
 
+## Установка
+#### Клонировать проект
+
+```
+git clone https://github.com/EngarS/money_transfer.git
+```
+
+#### Установить зависимости
+
+```
+composer install
+```
+
+#### Создать файл .env
+
+```
+cp .env .env.example
+```
+
+#### Сгенерировать ключ
+
+```
+php artisan key:generate
+```
+
+#### Выполнить миграции
+
+```
+php artisan migrate
+```
+
+#### Запустить seed для создания тестовых пользователей
+
+```
+php artisan db:seed
+```
+
+Будет создан администратор:   
+E-mail: **admin@admin.comс 
+Пароль: **secret** 
+
+Тестовый пользователь: 
+E-mail: **user@admin.com**  
+Пароль: **secret** 
+
+Остальные пользователи(e-mail узнать через администратора):  
+Пароль: **password** 
+
+#### Запустить обработку очередей
+
+```
+php artisan queue:work
+```
+
+При желании заменить  
+
+```
+QUEUE_CONNECTION=database 
+```
+
+на 
+
+```
+QUEUE_CONNECTION=redis 
+```
+
 
 ## Security Vulnerabilities
 

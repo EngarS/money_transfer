@@ -69,7 +69,7 @@
                             <li class="nav-item">
                                 <div class="nav-link">
                                     <h5>Баланс: <span class="badge badge-success">{{\Illuminate\Support\Facades\Auth::user()->balance()}}</span></h5>
-                                    <span>Блокировано: <span class="badge badge-warning">{{\Illuminate\Support\Facades\Auth::user()->blocked()}}</span></span>
+                                    <span>Заблокировано: <span class="badge badge-warning">{{\Illuminate\Support\Facades\Auth::user()->blocked()}}</span></span>
                                 </div>
                                 <div class="nav-link">
 

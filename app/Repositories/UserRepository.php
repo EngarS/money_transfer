@@ -47,7 +47,6 @@ class UserRepository
         ];
 
         $user->update($params);
-        Log::info('Блокировка ДС. Блокируемая сумма = ' . $money . ' | Общая сумма: ' . $user->block_money);
     }
 
     /**
@@ -58,14 +57,12 @@ class UserRepository
     public function writeOffBalance(int $userId, int $money)
     {
         $user = $this->model->find($userId);
-        Log::info('До списания ДС. Сумма списания: ' . $money . ' | Баланс: ' . $user->balance . ' | Блокировано: ' . $user->block_money);
         $params = [
             'balance' => $user->balance - $money,
             'block_money' => $user->block_money - $money,
         ];
 
         $user->update($params);
-        Log::info('Списание ДС. Сумма списания: ' . $money . ' | Баланс: ' . $user->balance . ' | Блокировано: ' . $user->block_money);
     }
 
     /**
@@ -74,13 +71,11 @@ class UserRepository
     public function enrollMoney(int $userId, int $money)
     {
         $user = $this->model->find($userId);
-        Log::info('До зачисления. Баланс: ' . $user->balance . ' | USerID: ' . $user->id);
         $params = [
           'balance' => $user->balance + $money,
         ];
 
         $user->update($params);
-        Log::info('После зачисления. Баланс: ' . $user->balance . ' | USerID: ' . $user->id);
     }
 
 
