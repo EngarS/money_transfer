@@ -23,7 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/transactions/create', [\App\Http\Controllers\TransactionController::class, 'create'])->name('transactions.create');
-    Route::get('transaction/store', [\App\Http\Controllers\TransactionController::class, 'store'])->name('transactions.store');
+    Route::post('transaction/store', [\App\Http\Controllers\TransactionController::class, 'store'])->name('transactions.store');
 });
 
 
